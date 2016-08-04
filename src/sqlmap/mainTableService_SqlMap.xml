@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap      
+    PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"      
+    "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+    
+    <!-- 在根元素上指定命名空间 -->
+<sqlMap namespace="mainTableService">
+   
+    <select id="getTableCodeList" resultClass="java.util.HashMap">
+	    SELECT * FROM PARTY_USER
+    </select>
+    
+     <select id="getDataCodeList" resultClass="java.util.HashMap">
+	    SELECT * from $tableName$ where ITEM_CODE = #dataCode#
+    </select>
+
+    <select id="getTableName" resultClass="java.lang.String">
+      select table_name from RES_SOURCE_TABLE where item_code=#itemCode#
+    </select>
+    
+    
+    <select id="getformatCodeList" resultClass="java.util.HashMap">
+	    SELECT  ve.field_code,ve.cell_format,st.Is_Ref,st.ref_table 
+	    FROM res_pm_view_element ve,res_source_table st 
+	    WHERE ve.field_code = st.item_code AND st.parent_code=#tableCode#
+    </select>
+
+    <select id="getComboFieldValues" resultClass="java.util.HashMap">
+	    SELECT field_name,field_type FROM RES_SOURCE_TABLE WHERE field_type IN ('0','1','11') AND
+	    level_code LIKE (SELECT level_code FROM RES_SOURCE_TABLE WHERE item_code =#itemCode#)||'%'
+    </select>
+    
+    <select id="getComboValues" resultClass="java.util.HashMap" remapResults="true">
+      select * from $tableName$
+      
+      <dynamic prepend =" where ">
+			<isNotNull prepend="and" property="fiscalFieldName">
+				$fiscalFieldName$ = $fiscal$
+			</isNotNull>
+	</dynamic>
+      order by $codeFieldName$
+    </select>
+    
+    <select id="getRefData" resultClass="java.lang.String" remapResults="true">
+      select $nameFieldName$ from $tableName$ where $codeFieldName$ = #codeValue#
+      
+      <dynamic>
+			<isNotNull prepend="and" property="fiscalFieldName">
+				$fiscalFieldName$ = $fiscal$
+			</isNotNull>
+	 </dynamic>
+    </select>
+
+
+</sqlMap>
