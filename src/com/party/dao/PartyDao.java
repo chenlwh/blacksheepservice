@@ -6,6 +6,7 @@
 package com.party.dao;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * 
@@ -13,5 +14,7 @@ import java.util.List;
 public interface PartyDao{
 	
 	public List<Object> getPartyUser();
+	
+	public boolean registerUser(Map<String,String> map);
 
 }

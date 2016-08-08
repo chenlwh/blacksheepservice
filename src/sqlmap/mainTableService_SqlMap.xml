@@ -10,6 +10,20 @@
 	    SELECT * FROM PARTY_USER
     </select>
     
+    <select id="validUser" resultClass="java.util.HashMap">
+    	SELECT ID FROM PARTY_USER WHERE USERNAME = #userName#
+    </select>
+
+	<insert id="registerUser">
+		INSERT INTO PARTY_USER
+		(ID, USERNAME, PASSWORD, MD5CODE, STATUS, REGISTERDATE, ISREMEMBER, TYPE)
+		VALUES
+		(#id#,#userName#,#password#,#md5code#,#status#,#registerDate#,#isRemember#,#type#)
+	</insert>
+    
+    
+    
+    
      <select id="getDataCodeList" resultClass="java.util.HashMap">
 	    SELECT * from $tableName$ where ITEM_CODE = #dataCode#
     </select>
