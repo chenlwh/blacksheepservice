@@ -39,6 +39,10 @@
 	<property name="partyDao" ref="partyDao"></property>
 </bean>
 
+<bean id="PartyHotLoginService" class="com.party.service.PartyHotLoginService">
+	<property name="partyDao" ref="partyDao"></property>
+</bean>
+
 <bean id="partyDao" class= "com.party.dao.PartyDaoImpl">
 	<property name="sqlMapClient" ref="sqlMapClient"></property>
 </bean>

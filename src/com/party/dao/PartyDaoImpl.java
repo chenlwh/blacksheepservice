@@ -53,4 +53,19 @@ public class PartyDaoImpl extends SqlMapClientDaoSupport implements PartyDao{
 		
 		return isSuccess;
 	}
+
+	/* (non-Javadoc)
+	 * @see com.party.dao.PartyDao#login(java.util.Map)
+	 */
+	@SuppressWarnings("rawtypes")
+	@Override
+	public boolean login(Map<String, String> map) {
+		boolean isSuccess = false;
+		List list = getSqlMapClientTemplate().queryForList("mainTableService.login", map);
+		if(list!=null && list.size()==1){			
+			isSuccess = true;
+		}
+		
+		return isSuccess;
+	}
 }

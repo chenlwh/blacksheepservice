@@ -2,14 +2,30 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>网红派帮助文档</title>
 </head>
 <body>
-<h2>注册接口：</h2>
-http://114.55.224.29:8080/blacksheepservice/register?name=username&pwd=password
+<h3>注册接口：</h3>
+http://114.55.224.29/blacksheepservice/register?name=username&pwd=password
 <br>
-username代表实际的用户名；password代表实际的用户密码。
-返回值为code和message。请根据返回值判断注册结果。
+<p>username代表实际的用户名；password代表实际的用户密码。</p>
+<p>返回值为code和message。请根据返回值判断注册结果。</p>
+<p>01：用户名已存在！</p>
+<p>02：注册成功！</p>
+<p>03：用户名不能为空.</p>
+<p>04：密码不能为空。</p>
+<br>
+
+<h3>登录接口：</h3>
+http://114.55.224.29/blacksheepservice/login?name=username&pwd=password
+<br>
+<p>username代表实际的用户名；password代表实际的用户密码。</p>
+<p>返回值为code和message。请根据返回值判断注册结果。</p>
+<p>01：用户名或密码不正确！</p>
+<p>02：登录成功！</p>
+<p>03：用户名不能为空.</p>
+<p>04：密码不能为空。</p>
+<br>
 
 </body>
 </html>

@@ -16,5 +16,6 @@ public interface PartyDao{
 	public List<Object> getPartyUser();
 	
 	public boolean registerUser(Map<String,String> map);
+	public boolean login(Map<String,String> map);
 
 }

@@ -21,6 +21,9 @@
 		(#id#,#userName#,#password#,#md5code#,#status#,#registerDate#,#isRemember#,#type#)
 	</insert>
     
+   <select id="login" resultClass="java.util.HashMap">
+    	SELECT ID FROM PARTY_USER WHERE USERNAME = #userName# and password = #password# and status="1"
+    </select>
     
     
     
