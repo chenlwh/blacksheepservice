@@ -21,5 +21,7 @@ public interface PartyDao{
 	public List<Object> loadPreferVideo();
 	public List<Object> loadPreferPlayer();
 	public List<Object> loadTopVideo();
+	public List<Object> loadHotPlayerVideo();
+	public List<Object> loadNewPlayerVideo();
 
 }

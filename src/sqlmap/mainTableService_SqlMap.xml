@@ -5,11 +5,6 @@
     
     <!-- 在根元素上指定命名空间 -->
 <sqlMap namespace="mainTableService">
-   
-    <select id="getTableCodeList" resultClass="java.util.HashMap">
-	    SELECT * FROM PARTY_USER
-    </select>
-    
     <select id="validUser" resultClass="java.util.HashMap">
     	SELECT ID FROM PARTY_USER WHERE USERNAME = #userName#
     </select>
@@ -41,8 +36,23 @@
 	    SELECT v.id, v.vediolink,v.description, v.date, v.browsers, v.tag 
 	    FROM party_vedio_info v order by v.browsers DESC limit 10
     </select>
+    
+    <select id="loadHotPlayerVideo" resultClass="java.util.HashMap">
+	    select v.id, v.vediolink, v.description, v.date, v.browsers, v.tag, hv.userID
+	    from party_hot_player h, party_vedio_publish hv, party_vedio_info v
+	    where h.uid = hv.userID and hv.vedioID = v.id and v.valid="1" order by h.series limit 4
+    </select>
 
-
+    <select id="loadNewPlayerVideo" resultClass="java.util.HashMap">
+	    select v.id, v.vediolink, v.description, v.date, v.browsers, v.tag, uv.userID
+	    from party_user u, party_vedio_publish uv, party_vedio_info v
+	    where u.id = uv.userID and uv.vedioID = v.id and v.valid="1" order by u.registerdate DESC limit 4
+    </select>
+   
+    <select id="getTableCodeList" resultClass="java.util.HashMap">
+	    SELECT * FROM PARTY_USER
+    </select>
+    
     <select id="getTableName" resultClass="java.lang.String">
       select table_name from RES_SOURCE_TABLE where item_code=#itemCode#
     </select>

@@ -98,5 +98,22 @@ public class PartyDaoImpl extends SqlMapClientDaoSupport implements PartyDao{
 		// TODO Auto-generated method stub
 		return getSqlMapClientTemplate().queryForList("mainTableService.loadTopVideo");
 	}
+
+	/* (non-Javadoc)
+	 * @see com.party.dao.PartyDao#loadHotPlayerVideo()
+	 */
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<Object> loadHotPlayerVideo() {
+		// TODO Auto-generated method stub
+		return getSqlMapClientTemplate().queryForList("mainTableService.loadHotPlayerVideo");
+	}
+	
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<Object> loadNewPlayerVideo() {
+		// TODO Auto-generated method stub
+		return getSqlMapClientTemplate().queryForList("mainTableService.loadNewPlayerVideo");
+	}
 	
 }
