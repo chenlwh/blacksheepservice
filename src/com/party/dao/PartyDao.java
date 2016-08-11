@@ -17,5 +17,9 @@ public interface PartyDao{
 	
 	public boolean registerUser(Map<String,String> map);
 	public boolean login(Map<String,String> map);
+	
+	public List<Object> loadPreferVideo();
+	public List<Object> loadPreferPlayer();
+	public List<Object> loadTopVideo();
 
 }

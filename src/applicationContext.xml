@@ -35,6 +35,7 @@
 	<property name="partyDao" ref="partyDao"></property>
 </bean>
 
+
 <bean id="PartyHotRegisterService" class="com.party.service.PartyHotRegisterService">
 	<property name="partyDao" ref="partyDao"></property>
 </bean>
@@ -42,6 +43,19 @@
 <bean id="PartyHotLoginService" class="com.party.service.PartyHotLoginService">
 	<property name="partyDao" ref="partyDao"></property>
 </bean>
+
+<bean id="PartyPreferVideoService" class="com.party.service.PartyPreferVideoService">
+	<property name="partyDao" ref="partyDao"></property>
+</bean>
+
+<bean id="PartyPreferPlayerService" class="com.party.service.PartyPreferPlayerService">
+	<property name="partyDao" ref="partyDao"></property>
+</bean>
+
+<bean id="PartyTopVideoService" class="com.party.service.PartyTopVideoService">
+	<property name="partyDao" ref="partyDao"></property>
+</bean>
+
 
 <bean id="partyDao" class= "com.party.dao.PartyDaoImpl">
 	<property name="sqlMapClient" ref="sqlMapClient"></property>

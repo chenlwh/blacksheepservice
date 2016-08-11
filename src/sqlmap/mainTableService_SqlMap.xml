@@ -25,21 +25,26 @@
     	SELECT ID FROM PARTY_USER WHERE USERNAME = #userName# and password = #password# and status="1"
     </select>
     
-    
-    
-     <select id="getDataCodeList" resultClass="java.util.HashMap">
-	    SELECT * from $tableName$ where ITEM_CODE = #dataCode#
+    <select id="loadPreferVideo" resultClass="java.util.HashMap">
+	    SELECT P.vedioID, P.series, I.vediolink, I.description, I.date, I.browsers, I.tag 
+	    FROM PARTY_PREFER_VEDIO P, PARTY_VEDIO_INFO I
+	    WHERE P.VEDIOID = I.ID AND I.VALID ="1" order by P.series limit 4
     </select>
+    
+    <select id="loadPreferPlayer" resultClass="java.util.HashMap">
+	    SELECT p.uid, u.username, u.nickname, u.aboutme, u.headimage, u.region, u.platform, p.series
+	    FROM party_hot_player p, party_user_details u
+	    WHERE p.uid = u.id order by p.series limit 10
+    </select>
+       
+    <select id="loadTopVideo" resultClass="java.util.HashMap">
+	    SELECT v.id, v.vediolink,v.description, v.date, v.browsers, v.tag 
+	    FROM party_vedio_info v order by v.browsers DESC limit 10
+    </select>
+
 
     <select id="getTableName" resultClass="java.lang.String">
       select table_name from RES_SOURCE_TABLE where item_code=#itemCode#
-    </select>
-    
-    
-    <select id="getformatCodeList" resultClass="java.util.HashMap">
-	    SELECT  ve.field_code,ve.cell_format,st.Is_Ref,st.ref_table 
-	    FROM res_pm_view_element ve,res_source_table st 
-	    WHERE ve.field_code = st.item_code AND st.parent_code=#tableCode#
     </select>
 
     <select id="getComboFieldValues" resultClass="java.util.HashMap">
