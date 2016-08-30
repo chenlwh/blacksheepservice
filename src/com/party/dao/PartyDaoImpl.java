@@ -5,6 +5,8 @@
  */
 package com.party.dao;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -114,6 +116,85 @@ public class PartyDaoImpl extends SqlMapClientDaoSupport implements PartyDao{
 	public List<Object> loadNewPlayerVideo() {
 		// TODO Auto-generated method stub
 		return getSqlMapClientTemplate().queryForList("mainTableService.loadNewPlayerVideo");
+	}
+
+
+	@SuppressWarnings({ "unchecked", "rawtypes" })
+	public List<Object> searchPlayer(String queryText) {
+		if(queryText.toUpperCase().indexOf("OR")>-1){
+			List list = new ArrayList();
+			list.add("Bad query!");
+			return list;
+		}else{
+			return getSqlMapClientTemplate().queryForList("mainTableService.searchPlayerList",queryText);
+		}
+		
+	}
+
+	@SuppressWarnings({ "unchecked", "rawtypes" })
+	public List<Object> searchPlayerDetails(String queryText) {
+		if(queryText.toUpperCase().indexOf("OR")>-1){
+			List list = new ArrayList();
+			list.add("Bad query!");
+			return list;
+		}else{
+			return getSqlMapClientTemplate().queryForList("mainTableService.searchPlayerResult",queryText);
+		}
+	}
+
+	@SuppressWarnings({ "unchecked", "rawtypes" })
+	public List<Object> searchVideo(String queryText) {
+		if(queryText.toUpperCase().indexOf("OR")>-1){
+			List list = new ArrayList();
+			list.add("Bad query!");
+			return list;
+		}else{
+			return getSqlMapClientTemplate().queryForList("mainTableService.searchVideoList",queryText);
+		}
+	}
+
+	@SuppressWarnings({ "unchecked", "rawtypes" })
+	public List<Object> searchVideoDetails(String queryText) {
+		if(queryText.toUpperCase().indexOf("OR")>-1){
+			List list = new ArrayList();
+			list.add("Bad query!");
+			return list;
+		}else{
+			return getSqlMapClientTemplate().queryForList("mainTableService.searchVideoResult",queryText);
+		}
+	}
+	
+	@SuppressWarnings({ "unchecked", "rawtypes" })
+	public List<Object> search(String queryText) {
+		if(queryText.toUpperCase().indexOf("OR")>-1){
+			Map playMap = new HashMap();
+			playMap.put("tag", "player");
+			playMap.put("data", "Bad query!");
+			Map videoMap = new HashMap();
+			videoMap.put("tag", "video");
+			videoMap.put("data", "Bad query!");
+			
+			List<Object> list = new ArrayList<Object>();
+			list.add(playMap);
+			list.add(videoMap);
+
+			return list;
+		}else{
+			List playerList = getSqlMapClientTemplate().queryForList("mainTableService.searchPlayerList",queryText);
+			List videoList = getSqlMapClientTemplate().queryForList("mainTableService.searchVideoList",queryText);
+			Map playMap = new HashMap();
+			playMap.put("tag", "player");
+			playMap.put("data", playerList);
+			Map videoMap = new HashMap();
+			videoMap.put("tag", "video");
+			videoMap.put("data", videoList);
+			
+			List<Object> list = new ArrayList<Object>();
+			list.add(playMap);
+			list.add(videoMap);
+			return list;
+		}
+		
 	}
 	
 }

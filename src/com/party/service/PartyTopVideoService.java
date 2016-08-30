@@ -16,7 +16,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.party.dao.PartyDao;
 import com.party.util.JsonUtil;
 
-@WebServlet("/prefervideo")
+@WebServlet("/topvideo")
 public class PartyTopVideoService extends BasicHttpServlet {
 
 	/**

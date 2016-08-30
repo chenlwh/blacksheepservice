@@ -21,7 +21,7 @@
     </select>
     
     <select id="loadPreferVideo" resultClass="java.util.HashMap">
-	    SELECT P.vedioID, P.series, I.vediolink, I.description, I.date, I.browsers, I.tag 
+	    SELECT P.vedioID, P.series, I.vediolink, I.description vedioDesc, I.date, I.browsers, I.tag, I.vedioimage
 	    FROM PARTY_PREFER_VEDIO P, PARTY_VEDIO_INFO I
 	    WHERE P.VEDIOID = I.ID AND I.VALID ="1" order by P.series limit 4
     </select>
@@ -33,21 +33,43 @@
     </select>
        
     <select id="loadTopVideo" resultClass="java.util.HashMap">
-	    SELECT v.id, v.vediolink,v.description, v.date, v.browsers, v.tag 
+	    SELECT v.id vedioID, v.vediolink,v.description vedioDesc, v.date, v.browsers, v.tag, v.vedioimage
 	    FROM party_vedio_info v order by v.browsers DESC limit 10
     </select>
     
     <select id="loadHotPlayerVideo" resultClass="java.util.HashMap">
-	    select v.id, v.vediolink, v.description, v.date, v.browsers, v.tag, hv.userID
+	    select v.id vedioID, v.vediolink, v.description vedioDesc, v.date, v.browsers, v.tag, v.vedioimage, hv.userID
 	    from party_hot_player h, party_vedio_publish hv, party_vedio_info v
 	    where h.uid = hv.userID and hv.vedioID = v.id and v.valid="1" order by h.series limit 4
     </select>
 
     <select id="loadNewPlayerVideo" resultClass="java.util.HashMap">
-	    select v.id, v.vediolink, v.description, v.date, v.browsers, v.tag, uv.userID
+	    select v.id vedioID, v.vediolink, v.description vedioDesc, v.date, v.browsers, v.tag, v.vedioimage, uv.userID
 	    from party_user u, party_vedio_publish uv, party_vedio_info v
 	    where u.id = uv.userID and uv.vedioID = v.id and v.valid="1" order by u.registerdate DESC limit 4
     </select>
+    
+    <select id="searchPlayerList" resultClass="java.util.HashMap">
+    	select p.id playerID, p.username, p.nickname, p.aboutme, p.headimage, p.age, p.sex, p.interest, p.region, p.platform
+    	from party_user_details p where p.username like CONCAT('%', #queryText# ,'%') or p.nickname like CONCAT('%', #queryText# ,'%')
+    </select>
+    
+    <select id="searchPlayerResult" resultClass="java.util.HashMap">
+    	select p.id playerID, p.username, p.nickname, p.aboutme, p.headimage, p.age, p.sex, p.interest, p.region, p.platform
+    	from party_user_details p where p.id = #queryText#
+    </select>
+    
+    <select id="searchVideoList" resultClass="java.util.HashMap">
+    	select v.id vedioID, v.vediolink, v.description vedioDesc, v.date, v.browsers, v.tag, v.vedioimage
+    	from party_vedio_info v where v.valid='1' and v.tag like CONCAT('%', #queryText# ,'%')
+    </select>
+    
+    <select id="searchVideoResult" resultClass="java.util.HashMap">
+    	select v.id vedioID, v.vediolink, v.description vedioDesc, v.date, v.browsers, v.tag, v.vedioimage
+    	from party_vedio_info v where v.valid='1' and v.id = #queryText#
+    </select>
+    
+    
    
     <select id="getTableCodeList" resultClass="java.util.HashMap">
 	    SELECT * FROM PARTY_USER
