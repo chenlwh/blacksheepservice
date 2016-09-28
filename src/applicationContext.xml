@@ -79,6 +79,22 @@
 	<property name="partyDao" ref="partyDao"></property>
 </bean>
 
+<bean id="PartySelfPageService" class="com.party.service.PartySelfPageService">
+	<property name="partyDao" ref="partyDao"></property>
+</bean>
+
+<bean id="PartySelfPreferService" class="com.party.service.PartySelfPreferService">
+	<property name="partyDao" ref="partyDao"></property>
+</bean>
+
+<bean id="PartySelfVideoService" class="com.party.service.PartySelfVideoService">
+	<property name="partyDao" ref="partyDao"></property>
+</bean>
+
+<bean id="PartyGoodsVideoService" class="com.party.service.PartyGoodsVideoService">
+	<property name="partyDao" ref="partyDao"></property>
+</bean>
+
 <bean id="partyDao" class= "com.party.dao.PartyDaoImpl">
 	<property name="sqlMapClient" ref="sqlMapClient"></property>
 </bean>

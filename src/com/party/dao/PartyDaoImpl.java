@@ -197,4 +197,27 @@ public class PartyDaoImpl extends SqlMapClientDaoSupport implements PartyDao{
 		
 	}
 	
+	@SuppressWarnings({ "unchecked" })
+	@Override
+	public List<Object> loadSelfPage(String username) {
+		return getSqlMapClientTemplate().queryForList("mainTableService.loadSelfPage", username);
+	}
+
+	@SuppressWarnings("unchecked")
+	public List<Object> loadSelfPrefer(String username) {
+		// TODO Auto-generated method stub
+		return 	getSqlMapClientTemplate().queryForList("mainTableService.loadSelfPrefer",username);
+	}
+	
+	@SuppressWarnings("unchecked")
+	public List<Object> loadSelfVideo(String username) {
+		// TODO Auto-generated method stub
+		return 	getSqlMapClientTemplate().queryForList("mainTableService.loadSelfVideo",username);
+	}
+	
+	@SuppressWarnings("unchecked")
+	public List<Object> openGoodsVideo(String videoID) {
+		// TODO Auto-generated method stub
+		return 	getSqlMapClientTemplate().queryForList("mainTableService.openGoodsVideo",videoID);
+	}
 }

@@ -70,6 +70,28 @@
     </select>
     
     
+    <select id="loadSelfPage" resultClass="java.util.HashMap">
+	    SELECT username, nickname, aboutme, headimage, age, sex, interest, region, platformName, platformLink, shopName, shopLink
+	    FROM party_user_details where username = #username#
+    </select>
+    
+    <select id="loadSelfPrefer" resultClass="java.util.HashMap">
+	    select info.id videoID, info.vediolink videoLink, info.description videoDesc, info.date, info.browsers, info.tag, info.vedioimage videoImage, publish.userID
+	    from party_vedio_info info, party_user user, party_goods_publish publish
+	    where info.valid ="1" and info.id = publish.vedioID and publish.userID = user.id and user.username = #username#
+    </select>
+
+    <select id="loadSelfVideo" resultClass="java.util.HashMap">
+	    select info.id videoID, info.vediolink videoLink, info.description videoDesc, info.date, info.browsers, info.tag, info.vedioimage videoImage, publish.userID
+	    from party_vedio_info info, party_user user, party_vedio_publish publish
+	    where info.valid ="1" and info.id = publish.vedioID and publish.userID = user.id and user.username = #username#
+    </select>
+    
+    <select id="openGoodsVideo" resultClass="java.util.HashMap">
+	    select info.id videoID, info.vediolink videoLink, info.description videoDesc, info.date, info.browsers, info.tag, info.vedioimage videoImage, goods.goodslink
+	    from party_vedio_info info, party_goods_info goods, party_goods_publish publish
+	    where info.valid ="1" and publish.goodsID = goods.id and publish.vedioID = #videoID# and publish.vedioID = info.id
+    </select>
    
     <select id="getTableCodeList" resultClass="java.util.HashMap">
 	    SELECT * FROM PARTY_USER

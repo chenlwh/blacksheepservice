@@ -29,5 +29,12 @@ public interface PartyDao{
 	public List<Object> searchPlayerDetails(String queryText);
 	public List<Object> searchVideo(String queryText);
 	public List<Object> searchVideoDetails(String queryText);
+	
+	public List<Object> loadSelfPage(String username);
+	public List<Object> loadSelfPrefer(String username);
+	public List<Object> loadSelfVideo(String username);
+	
+	public List<Object> openGoodsVideo(String videoID);
+	
 
 }
