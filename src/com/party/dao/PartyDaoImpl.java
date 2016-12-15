@@ -220,4 +220,34 @@ public class PartyDaoImpl extends SqlMapClientDaoSupport implements PartyDao{
 		// TODO Auto-generated method stub
 		return 	getSqlMapClientTemplate().queryForList("mainTableService.openGoodsVideo",videoID);
 	}
+	
+	@SuppressWarnings("rawtypes")
+	public boolean favorite(Map<String, String> map) {
+		// TODO Auto-generated method stub
+		List list = getSqlMapClientTemplate().queryForList("mainTableService.favorite", map);
+		if(list==null || list.size()==0){
+			String date = PartyUtil.getCurrentDateString();
+			map.put("date", date);			
+			getSqlMapClientTemplate().insert("mainTableService.addFavorite", map);			
+			return true;
+		}else{
+			getSqlMapClientTemplate().delete("mainTableService.deleteFavorite", map);	
+			return false;
+		}
+		
+	}
+	
+	@SuppressWarnings("rawtypes")
+	public boolean isFavorite(Map<String, String> map) {
+		// TODO Auto-generated method stub
+		List list = getSqlMapClientTemplate().queryForList("mainTableService.favorite", map);
+		if(list==null || list.size()==0){		
+			return false;
+		}else{
+			return true;
+		}
+		
+	}
+	
+	
 }

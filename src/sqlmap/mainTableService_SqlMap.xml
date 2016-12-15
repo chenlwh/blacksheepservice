@@ -92,6 +92,21 @@
 	    from party_vedio_info info, party_goods_info goods, party_goods_publish publish
 	    where info.valid ="1" and publish.goodsID = goods.id and publish.vedioID = #videoID# and publish.vedioID = info.id
     </select>
+    
+    <select id="favorite" resultClass="java.util.HashMap">
+    	SELECT ID FROM PARTY_USER_FAVORITES WHERE ID = #favoriteID# and userID = #userName#
+    </select>
+
+	<insert id="addFavorite">
+		INSERT INTO PARTY_USER_FAVORITES
+		(ID, USERID, DATE)
+		VALUES
+		(#favoriteID#,#userName#,#date#)
+	</insert>
+	
+	<delete id="deleteFavorite">
+		DELETE FROM PARTY_USER_FAVORITES WHERE ID = #favoriteID# and userID = #userName#
+	</delete>
    
     <select id="getTableCodeList" resultClass="java.util.HashMap">
 	    SELECT * FROM PARTY_USER

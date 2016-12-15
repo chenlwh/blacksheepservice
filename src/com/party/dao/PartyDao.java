@@ -36,5 +36,9 @@ public interface PartyDao{
 	
 	public List<Object> openGoodsVideo(String videoID);
 	
+	public boolean favorite(Map<String,String> map);
+	public boolean isFavorite(Map<String,String> map);
+	
+	
 
 }

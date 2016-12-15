@@ -1,6 +1,6 @@
  /**
  * @author: chenlwh
- * @date: Jul 27, 2016 11:34:08 PM
+ * @date: Sep 27, 2016 11:34:08 PM
  * @description:All Right Reserved for Party Service.
  */
 package com.party.service;
@@ -17,8 +17,8 @@ import javax.servlet.http.HttpServletResponse;
 import com.party.dao.PartyDao;
 import com.party.util.JsonUtil;
 
-@WebServlet("/login")
-public class PartyHotLoginService extends BasicHttpServlet {
+@WebServlet("/isfavorite")
+public class PartyIsFavoriteService extends BasicHttpServlet {
 
 	/**
 	 * 
@@ -26,16 +26,16 @@ public class PartyHotLoginService extends BasicHttpServlet {
 	private static final long serialVersionUID = -4692114364987448157L;
 	
 	private String username;
-	private String password;
+	private String favoriteID;
 	
 	public PartyDao partyDao;
 	
-	public PartyHotLoginService service;
+	public PartyIsFavoriteService service;
 
 	@Override
 	public void init() throws ServletException {
 		super.init();
-		service = (PartyHotLoginService) this.getBean("PartyHotLoginService");
+		service = (PartyIsFavoriteService) this.getBean("PartyIsFavoriteService");
 	}
 	
 
@@ -43,7 +43,7 @@ public class PartyHotLoginService extends BasicHttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		username = request.getParameter("name");
-		password = request.getParameter("pwd");
+		favoriteID = request.getParameter("id");
 		
 		super.doPost(request, response);		
 	}
@@ -56,25 +56,21 @@ public class PartyHotLoginService extends BasicHttpServlet {
 		Map<String,Object> resultMap = new HashMap<String,Object>();
 		Map<String,String> map = new HashMap<String,String>();
 		map.put("userName", username);
-		map.put("password", password);
+		map.put("favoriteID", favoriteID);
 		
-		if(username==null){
-			message = "用户名不能为空.";
+		if(username==null||favoriteID==null){
+			message = "参数不合法。";
 			resultMap.put("code","03");
 			resultMap.put("message", message);
-		}else if(password==null){
-			message = "密码不能为空。";
-			resultMap.put("code","04");
-			resultMap.put("message", message);
 		}else{
-			boolean isSuccess = service.getPartyDao().login(map);
+			boolean isSuccess = service.getPartyDao().isFavorite(map);
 			
-			if(!isSuccess){
-				message = "用户名或密码不正确！";
+			if(isSuccess){
+				message = "已收藏。";
 				resultMap.put("code","01");
 				resultMap.put("message", message);
 			}else{
-				message = "登录成功！";
+				message = "未收藏。";
 				resultMap.put("code","02");
 				resultMap.put("message", message);
 			}
@@ -86,11 +82,11 @@ public class PartyHotLoginService extends BasicHttpServlet {
 	
 
 
-	public PartyHotLoginService getService() {
+	public PartyIsFavoriteService getService() {
 		return service;
 	}
 
-	public void setService(PartyHotLoginService service) {
+	public void setService(PartyIsFavoriteService service) {
 		this.service = service;
 	}
 
@@ -101,6 +97,26 @@ public class PartyHotLoginService extends BasicHttpServlet {
 
 	public void setPartyDao(PartyDao partyDao) {
 		this.partyDao = partyDao;
+	}
+
+
+	public String getUsername() {
+		return username;
+	}
+
+
+	public void setUsername(String username) {
+		this.username = username;
+	}
+
+
+	public String getFavoriteID() {
+		return favoriteID;
+	}
+
+
+	public void setFavoriteID(String favoriteID) {
+		this.favoriteID = favoriteID;
 	}
 
 

@@ -59,22 +59,22 @@ public class PartyHotRegisterService extends BasicHttpServlet {
 		map.put("password", password);
 		
 		if(username==null){
-			message = "ÓÃ»§Ãû²»ÄÜÎª¿Õ.";
+			message = "ç”¨æˆ·åä¸èƒ½ä¸ºç©º.";
 			resultMap.put("code","03");
 			resultMap.put("message", message);
 		}else if(password==null){
-			message = "ÃÜÂë²»ÄÜÎª¿Õ¡£";
+			message = "å¯†ç ä¸èƒ½ä¸ºç©ºã€‚";
 			resultMap.put("code","04");
 			resultMap.put("message", message);
 		}else{
 			boolean isSuccess = service.getPartyDao().registerUser(map);
 			
 			if(!isSuccess){
-				message = "ÓÃ»§ÃûÒÑ´æÔÚ£¡";
+				message = "ç”¨æˆ·åå·²å­˜åœ¨ï¼";
 				resultMap.put("code","01");
 				resultMap.put("message", message);
 			}else{
-				message = "×¢²á³É¹¦£¡";
+				message = "æ³¨å†ŒæˆåŠŸï¼";
 				resultMap.put("code","02");
 				resultMap.put("message", message);
 			}

@@ -95,10 +95,17 @@
 	<property name="partyDao" ref="partyDao"></property>
 </bean>
 
+<bean id="PartyFavoriteService" class="com.party.service.PartyFavoriteService">
+	<property name="partyDao" ref="partyDao"></property>
+</bean>
+
+<bean id="PartyIsFavoriteService" class="com.party.service.PartyIsFavoriteService">
+	<property name="partyDao" ref="partyDao"></property>
+</bean>
+
 <bean id="partyDao" class= "com.party.dao.PartyDaoImpl">
 	<property name="sqlMapClient" ref="sqlMapClient"></property>
 </bean>
-
 
 
 <bean id="partyHotPlayerService" class="com.party.service.PartyHotPlayerService">
